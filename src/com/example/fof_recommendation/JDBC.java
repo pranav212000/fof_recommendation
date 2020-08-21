@@ -35,11 +35,9 @@ public class JDBC {
     }
 
 
-
     public User addUser(String name, String lastname, String address, String userContact) throws SQLException {
         //STEP 4: Execute a query
         System.out.println("Inserting records into the table...");
-        statement = connection.createStatement();
 
         String sql = "INSERT INTO users (name, lastname, address, usercontact) " +
                 "VALUES (?, ?, ?, ?)";
@@ -55,7 +53,7 @@ public class JDBC {
 //        ResultSet resultSet = preparedStatement.getResultSet();
 //        System.out.println(resultSet.toString());
 //
-        String userId = "";
+        int userId = -1;
 //        while(resultSet != null && resultSet.next()) {
 //            userId = String.valueOf(resultSet.getInt(1));
 //            System.out.println("result set : " + resultSet.toString());
@@ -63,8 +61,8 @@ public class JDBC {
 
 
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
-        if(resultSet != null && resultSet.next()){
-            userId = String.valueOf(resultSet.getInt(1));
+        if (resultSet != null && resultSet.next()) {
+            userId = resultSet.getInt(1);
         }
 
 
@@ -73,6 +71,42 @@ public class JDBC {
 
         return new User(userId, name, lastname, address, userContact);
 
+    }
+
+
+    public void addPassword(int userid, String password){
+        String sql = "INSERT INTO passwords (userid, password) " +
+                "VALUES (?, ?)";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, userid);
+            preparedStatement.setString(2, password);
+            preparedStatement.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println("Something went wrong while storing password...try again!");
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+    public void closeConenction() {
+
+        try {
+            if (preparedStatement != null)
+                connection.close();
+        } catch (SQLException se) {
+        }// do nothing
+        try {
+            if (connection != null)
+                connection.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
     }
 
 

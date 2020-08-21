@@ -82,7 +82,6 @@ public class Server {
 
                     case Codes.END_OF_CONVO:
                         isReading = false;
-//                        sendObject(new User(name, "1", address, new Contact("1", userContact)));
                         break;
 
                     default:
@@ -96,15 +95,33 @@ public class Server {
 
             try {
                 jdbc.useDatabase("sdldev");
+
                 User user = jdbc.addUser(name, lastname, address, userContact);
                 System.out.println("IN SERVER");
                 System.out.println(user.toString());
                 sendObject(user);
 
+                int userid = -1;
+                String password = "";
+
+                while(!inputStream.readUTF().equals(Codes.END_OF_CONVO)) {
+                    if(inputStream.readUTF().equals(Codes.USERID_CODE)) {
+                        userid = Integer.parseInt(inputStream.readUTF());
+                    }
+                    if(inputStream.readUTF().equals(Codes.USER_PASSWORD_CODE)) {
+                        password = inputStream.readUTF();
+                    }
+                }
+
+                jdbc.addPassword(userid, password);
+
+                
 
             } catch (SQLException e) {
                 System.out.println("Oops something went wrong!!!");
                 e.printStackTrace();
+            } finally {
+                jdbc.closeConenction();
             }
 
 
