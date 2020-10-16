@@ -38,6 +38,10 @@ public class Server {
                 case Codes.USER_DETAIL_CODE:
                     registerUser();
                     break;
+
+                case Codes.USER_LOGIN_CODE:
+                    loginUser();
+                    break;
             }
 
 
@@ -61,7 +65,7 @@ public class Server {
         try {
 
             boolean isReading = true;
-            String name = "", address = "", userContact = "", lastname = "";
+            String name = "", address = "", userContact = "", lastname = "", password = "";
             while (isReading) {
                 String code = inputStream.readUTF();
                 switch (code) {
@@ -80,6 +84,10 @@ public class Server {
                         userContact = inputStream.readUTF();
                         break;
 
+                    case Codes.USER_PASSWORD_CODE:
+                        password = inputStream.readUTF();
+                        break;
+
                     case Codes.END_OF_CONVO:
                         isReading = false;
                         break;
@@ -93,36 +101,30 @@ public class Server {
 
             jdbc = new JDBC();
 
+
+//                TODO change db for prod.
             try {
                 jdbc.useDatabase("sdldev");
-
-                User user = jdbc.addUser(name, lastname, address, userContact);
-                System.out.println("IN SERVER");
-                System.out.println(user.toString());
-                sendObject(user);
-
-                int userid = -1;
-                String password = "";
-
-                while(!inputStream.readUTF().equals(Codes.END_OF_CONVO)) {
-                    if(inputStream.readUTF().equals(Codes.USERID_CODE)) {
-                        userid = Integer.parseInt(inputStream.readUTF());
-                    }
-                    if(inputStream.readUTF().equals(Codes.USER_PASSWORD_CODE)) {
-                        password = inputStream.readUTF();
-                    }
-                }
-
-                jdbc.addPassword(userid, password);
-
-                
-
             } catch (SQLException e) {
-                System.out.println("Oops something went wrong!!!");
                 e.printStackTrace();
-            } finally {
-                jdbc.closeConenction();
             }
+
+            User user = jdbc.addUser(name, lastname, address, userContact, password);
+            System.out.println("IN SERVER");
+            System.out.println(user.toString());
+            sendObject(user);
+
+
+//                while (!inputStream.readUTF().equals(Codes.END_OF_CONVO)) {
+//                    if (inputStream.readUTF().equals(Codes.USERID_CODE)) {
+//                        userid = Integer.parseInt(inputStream.readUTF());
+//                    }
+//                    if (inputStream.readUTF().equals(Codes.USER_PASSWORD_CODE)) {
+//                        password = inputStream.readUTF();
+//                    }
+//                }
+
+//                jdbc.addPassword(userid, password);
 
 
             System.out.println(name);
@@ -132,6 +134,57 @@ public class Server {
 
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            jdbc.closeConenction();
+        }
+
+    }
+
+
+    public void loginUser() {
+        try {
+            boolean isReading = true;
+            String userContact = "";
+            String password = "";
+            JDBC jdbc = new JDBC();
+            try {
+                jdbc.useDatabase("sdldev");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            User user = null;
+            while (isReading) {
+                String code = inputStream.readUTF();
+                switch (code) {
+
+                    case Codes.USER_CONTACT_CODE:
+
+                        userContact = inputStream.readUTF();
+                        break;
+
+                    case Codes.USER_PASSWORD_CODE:
+                        password = inputStream.readUTF();
+                        if (!userContact.isEmpty()) {
+                            user = jdbc.checkUser(userContact, password);
+                            if(user != null) {
+                            	sendObject(user);
+                            }
+                        }
+                        break;
+
+                    case Codes.END_OF_CONVO:
+                        isReading = false;
+                        break;
+
+                    default:
+                        System.out.println("Reading done!");
+                        isReading = false;
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
         }
     }
 

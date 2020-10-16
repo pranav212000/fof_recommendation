@@ -10,5 +10,6 @@ public class Codes {
     public static final String USER_CONTACT_CODE = "5";
     public static final String USER_PASSWORD_CODE = "6";
     public static final String USERID_CODE = "7";
+    public static final String USER_LOGIN_CODE = "8";
 
 }

@@ -2,18 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="733b9566-fe0f-4924-889a-02cb26fde5f8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/example/fof_recommendation/Codes.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/example/fof_recommendation/Codes.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/example/fof_recommendation/JDBC.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/example/fof_recommendation/JDBC.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/example/fof_recommendation/Register.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/example/fof_recommendation/Register.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/example/fof_recommendation/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/example/fof_recommendation/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/example/fof_recommendation/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/example/fof_recommendation/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/fof_recommendation/Codes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/fof_recommendation/Codes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/fof_recommendation/JDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/fof_recommendation/JDBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/fof_recommendation/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/fof_recommendation/Register.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/fof_recommendation/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/fof_recommendation/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/fof_recommendation/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/fof_recommendation/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +45,8 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/mysql-connector-java-8.0.21.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunManager" selected="Application.Register">
@@ -134,10 +131,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="349" y="155" key="IDE.errors.dialog/0.0.1536.824@0.0.1536.824" timestamp="1597985192749" />
-    <state x="277" y="0" key="SettingsEditor" timestamp="1597819150954">
+    <state x="277" y="0" key="SettingsEditor" timestamp="1598264022570">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1597819150954" />
+    <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1598264022570" />
+    <state x="93" y="93" width="1350" height="638" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1598264067870">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1536.824@0.0.1536.824" timestamp="1598264067870" />
     <state x="463" y="144" width="631" height="536" key="find.popup" timestamp="1597941672635">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
