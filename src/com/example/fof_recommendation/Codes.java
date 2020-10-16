@@ -11,5 +11,9 @@ public class Codes {
     public static final String USER_PASSWORD_CODE = "6";
     public static final String USERID_CODE = "7";
     public static final String USER_LOGIN_CODE = "8";
+    public static final String POST_LOOKING_FOR = "9";
+    public static final String LOOKING_FOR = "10";
+    public static final String LOCATION = "11";
 
+    
 }

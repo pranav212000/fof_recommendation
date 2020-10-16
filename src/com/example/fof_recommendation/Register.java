@@ -115,31 +115,20 @@ public class Register {
 		client.sendString(contact, Codes.USER_CONTACT_CODE);
 		client.sendString(password, Codes.USER_PASSWORD_CODE);
 		client.sendString(Codes.END_OF_CONVO);
-		User user = null;
+
 		try {
-			user = (User) client.getObject();
-			if (user != null) {
-				System.out.println("Login Successful");
-				Home.main(null);
-			}
+			User user = (User) client.getObject();
+
+			System.out.println("Login Successful");
+			Home home = new Home(user.getUserContact(), client);
+			home.getOption();
+
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		scanner.close();
 		return true;
-	}
-
-
-
-	public void sendUserDetails(Client client, String name, String address, String userContact) {
-
-		Queue<String> data = new LinkedList<>();
-
-		data.add(name);
-		data.add(address);
-		data.add(userContact);
-		client.closeConnection();
 	}
 
 }

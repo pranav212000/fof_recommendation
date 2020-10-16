@@ -92,6 +92,21 @@ public class JDBC {
 		}
 	}
 
+	
+	public boolean postLookingFor(String contact, String lookingFor, String location) {
+		try {
+			String sql = "INSERT INTO lookingFor (contact, lookingFor, location) values (?,?,?)";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, contact);
+			preparedStatement.setString(2, lookingFor);
+			preparedStatement.setString(3, location);
+			preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	public User checkUser(String contact, String password) {
 
 		String sql = "SELECT * FROM passwords where userid = (SELECT userid from users where usercontact = ?)";

@@ -1,14 +1,22 @@
 package com.example.fof_recommendation;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 public class Home {
-
-	User user;
+	String contact;
 	Client client;
 	static boolean isLoggedIn;
+
+	Home() {
+
+	}
+
+	Home(String contact, Client client) {
+		this.contact = contact;
+		this.client = client;
+	}
 
 	public void readOption() {
 		System.out.println("1. Post");
@@ -29,10 +37,9 @@ public class Home {
 		}
 	}
 
-	public static void main(String[] args) {
+	public void getOption() {
 
-		Home home = new Home();
-		while (true) {
+		
 			System.out.println("1. Post");
 			System.out.println("2. Feed");
 			String input = "";
@@ -45,12 +52,12 @@ public class Home {
 			}
 
 			if (input.equals("1")) {
-				home.makePost();
+				makePost();
 			} else if (input.equals("2")) {
-				home.showFeed();
+				showFeed();
 			}
-		}
 
+		
 	}
 
 	public void makePost() {
@@ -69,10 +76,34 @@ public class Home {
 			case "1":
 				question = "What are you looking for ?";
 				System.out.println(question);
-				what = br.readLine();
-				System.out.println("Enter the location : ");
-				location = br.readLine();
 
+				while (what.isEmpty()) {
+					what = br.readLine();
+					if (what.isEmpty())
+						System.out.println("Enter what you are looking for");
+				}
+				System.out.println("Enter the location : ");
+				while (location.isEmpty()) {
+					location = br.readLine();
+					if (what.isEmpty())
+						System.out.println("Enter location");
+				}
+
+				client.sendString(Codes.POST_LOOKING_FOR);
+				client.sendString(contact, Codes.USER_CONTACT_CODE);
+				client.sendString(what, Codes.LOOKING_FOR);
+				client.sendString(location, Codes.LOCATION);
+				client.sendString(Codes.END_OF_CONVO);
+				LookingFor lookingFor;
+				try {
+					lookingFor = (LookingFor) client.getObject();
+					if (lookingFor != null) {
+						System.out.println("POST SUCCESSFUL");
+						System.out.println(lookingFor.toString());
+					}
+				} catch (IOException | ClassNotFoundException e) {
+					e.printStackTrace();
+				}
 				break;
 
 			}
